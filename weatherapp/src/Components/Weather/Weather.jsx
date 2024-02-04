@@ -21,56 +21,65 @@ const Weather = () =>{
         {
            return 0;
         }
-        let url=`https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=e6922af6404857e7b2b79d9dac01decc`;
-        let response =await  fetch(url);
-        let data= await response.json().then(data1=>{
+
+        try{
+            let url=`https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=e6922af6404857e7b2b79d9dac01decc`;
+            let response =await  fetch(url);
+            let data= await response.json().then(data1=>{
             
-           const humidity=document.getElementsByClassName('humdity-percentage');
-           humidity[0].innerHTML=data1.main.humidity+"%";
-           const wind=document.getElementsByClassName("wind-rate");
-           const temperature=document.getElementsByClassName("weather-temp");
-           const location=document.getElementsByClassName("weather-location");
-           wind[0].innerHTML=data1.wind.speed+"km/hr";
-           temperature[0].innerHTML=data1.main.temp+"°C";
-           location[0].innerHTML=data1.name;
-
-           const weather_img=document.getElementsByClassName('weather_image');
-           
-
-           if(data1.weather[0].icon=="01d"||data1.weather[0].icon=="01n")
-           {
-            weather_img[0].src=clear_icon;
-           }
-           else if(data1.weather[0].icon=='02d'||data1.weather[0].icon=='02n')
-           {
-            weather_img[0].src=cloud_icon;
-           }
-           else if(data1.weather[0].icon=="03d"||data1.weather[0].icon=="03n")
-           {
-            weather_img[0].src=drizzle_icon;
-           }
-           else if(data1.weather[0].icon=="04d"||data1.weather[0].icon=="04n")
-           {
-            weather_img[0].src=drizzle_icon;
-           }
-           else if(data1.weather[0].icon=="09d"||data1.weather[0].icon=="09n")
-           {
-            weather_img[0].src=rain_icon;
-           }
-           else if(data1.weather[0].icon=="10d"||data1.weather[0].icon=="10n")
-           {
-            weather_img[0].src=rain_icon;
-           }
-           else if(data1.weather[0].icon=="13d"||data1.weather[0].icon=="13n")
-           {
-            weather_img[0].src=snow_icon;
-           }
-           else
-           {
-            weather_img[0].src=clear_icon;
-           }
-
-        });      
+                const humidity=document.getElementsByClassName('humdity-percentage');
+                humidity[0].innerHTML=data1.main.humidity+"%";
+                const wind=document.getElementsByClassName("wind-rate");
+                const temperature=document.getElementsByClassName("weather-temp");
+                const location=document.getElementsByClassName("weather-location");
+                wind[0].innerHTML=data1.wind.speed+"km/hr";
+                temperature[0].innerHTML=data1.main.temp+"°C";
+                location[0].innerHTML=data1.name;
+     
+                const weather_img=document.getElementsByClassName('weather_image');
+                
+     
+                if(data1.weather[0].icon=="01d"||data1.weather[0].icon=="01n")
+                {
+                 weather_img[0].src=clear_icon;
+                }
+                else if(data1.weather[0].icon=='02d'||data1.weather[0].icon=='02n')
+                {
+                 weather_img[0].src=cloud_icon;
+                }
+                else if(data1.weather[0].icon=="03d"||data1.weather[0].icon=="03n")
+                {
+                 weather_img[0].src=drizzle_icon;
+                }
+                else if(data1.weather[0].icon=="04d"||data1.weather[0].icon=="04n")
+                {
+                 weather_img[0].src=drizzle_icon;
+                }
+                else if(data1.weather[0].icon=="09d"||data1.weather[0].icon=="09n")
+                {
+                 weather_img[0].src=rain_icon;
+                }
+                else if(data1.weather[0].icon=="10d"||data1.weather[0].icon=="10n")
+                {
+                 weather_img[0].src=rain_icon;
+                }
+                else if(data1.weather[0].icon=="13d"||data1.weather[0].icon=="13n")
+                {
+                 weather_img[0].src=snow_icon;
+                }
+                else
+                {
+                 weather_img[0].src=clear_icon;
+                }
+     
+             }); 
+        }
+        catch(err)
+        {
+            window.alert('No such place found');
+        }
+       
+            
     }
     return(
         <div className="container">
